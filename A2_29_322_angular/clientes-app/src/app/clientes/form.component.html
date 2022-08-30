@@ -1,0 +1,48 @@
+
+<!--  [(ngModel)] : ES UNA DIRECTIVA QUE VA A POBLAR CON LOS DATOS DEL FORMULARIO AL OBJ CLIENTE QUE SE CREÓ EN FORM.COMPONENT.TS Y ESTOS DATOS SE VAN A POBLAR EN LOS ATRIBUTOS DE LA CLASE CLIENTE.TS
+
+<form (ngSubmit) = "create()"> : SE INVOCA EL NOMBRE DEL MÉTODO DEL COMPONENTE AL CUAL SE VA A LLAMAR CUANDO SE ENVÍE EL FORMULARIO.
+
+--->
+
+<div class="card bg-dark text-white">
+  <div class="card-header">{{ titulo }}</div>
+  <div class="card-body">
+
+    <form> <!--SE QUITÓ DE AQUÍ EL  (ngSubmit) = "create()"   Y SE AGREGÓ EN EL BUTTON-->
+
+      <div class="form-group row">
+        <label for="nombre" class="col-form-label col-sm-2">nombre</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="cliente.nombre" name="nombre">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="apellido" class="col-form-label col-sm-2">apellido</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="cliente.apellido" name="apellido">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="email" class="col-form-label col-sm-2">email</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="cliente.email" name="email">
+        </div>
+      </div>
+
+      <div class="form-group row">
+          <div class="col-sm-6">
+              <!--SI NO EXISTE EL CLIENTE.ID, MUESTRA EÑ BOTÓN CREAR. SINO SE CREA UN ELSEBLOCK PARA CREAR UN TEMPLATE Y CON ESTE TEMPLATE SE COLOCA UN BOTÓN DE ACTUALIZAR-->
+              <!--DESPUÉS SE VA AL CLIENTE.SERVICE PARA EL DELETE()-->
+              <button class="btn btn-primary" role="button" (click)='create()' *ngIf="!cliente.id else elseBlock">Crear</button>
+              <ng-template #elseBlock>
+                  <button class="btn btn-primary" role="button" (click)='update()'>Editar</button>
+              </ng-template>
+          </div>
+      </div>
+
+    </form>
+  </div>
+</div>

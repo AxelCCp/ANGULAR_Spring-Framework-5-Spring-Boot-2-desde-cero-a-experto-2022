@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+/*CLASE 336
+...viene de clientes.component.html...
+//SE ARREGLA LA WEA QUE CORTA LA PÁGINA A LA MITAD CUANDO LA LISTA DE CLIENTES TIENE MUCHOS CLIENTES.
+...se va al app component.html .... para agregar un padding agregá esta wea en el div "pb-5"....
+*/
+
+html{
+  position : relative;
+  min-height: 100%;
+}
+body{
+  margin-bottom: 60px;
+}
