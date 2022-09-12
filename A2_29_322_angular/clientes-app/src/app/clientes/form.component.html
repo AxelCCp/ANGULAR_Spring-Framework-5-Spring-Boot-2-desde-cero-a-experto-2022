@@ -3,7 +3,16 @@
 
 <form (ngSubmit) = "create()"> : SE INVOCA EL NOMBRE DEL MÉTODO DEL COMPONENTE AL CUAL SE VA A LLAMAR CUANDO SE ENVÍE EL FORMULARIO.
 
+CLASE 346 : SE AGERGAN VALIDADORES AL FORMULARIO ........ no las incluí .. me dio paja ...
+
 --->
+<!--CLASE 352
+SE MUESTRAN LOS ERRORES QUE VIENEN DESDE EL REST. CONFIGURADOS EN FORm.COMPONENT.TS. ... SE VALIDA SI LA LISTA ES MAYOR A 0 PARA MOSTRAR EL UL CON LOS ERRORES.-->
+<ul class = "alert alert-danger" *ngIf = "errores?.length > 0">
+  <li *ngFor = "let err of errores">
+    {{err}}
+  </li>
+</ul>
 
 <div class="card bg-dark text-white">
   <div class="card-header">{{ titulo }}</div>
@@ -21,14 +30,14 @@
       <div class="form-group row">
         <label for="apellido" class="col-form-label col-sm-2">apellido</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" [(ngModel)]="cliente.apellido" name="apellido">
+          <input type="text" class="form-control" [(ngModel)]="cliente.apellido" name="apellido" >
         </div>
       </div>
 
       <div class="form-group row">
         <label for="email" class="col-form-label col-sm-2">email</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" [(ngModel)]="cliente.email" name="email">
+          <input type="text" class="form-control" [(ngModel)]="cliente.email" name="email" >
         </div>
       </div>
 

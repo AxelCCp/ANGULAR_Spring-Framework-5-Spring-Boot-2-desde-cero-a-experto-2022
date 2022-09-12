@@ -33,6 +33,19 @@ import { Router,ActivatedRoute } from '@angular/router';//8    //11.2
   //13.-CREA EL MÉTODO UPDATE():
     //this.clienteService.update(this.cliente).subscribe() : SE USA EL MÉTODO DEL SERVICIO, SE LE PASA EL CLIENTE Y SE SUSBRIBE UN OBSERVADOR. EL OBSERVADOR QUEDA ATENTO A LA RESPUESTA, QUE ES EL CLIENTE, Y CON ESTO DESPUÉS SE REDIRIGE A CLIENTES.
 //...después se va al form.component.html ... PARA AGREGAR EL BOTÓN DE ACTUALIZAR.
+
+//CLASE345
+//SE CAMBIA EL TIPO DE <CLIENTE> A <any> PARA Q RECIBA CUALQUIER TIPO DE DATO. en cliente.service.ts num (19.-)
+// vuelve de cliente.service.ts
+
+//CLASE351
+//MANEJANDO LOS ERRORES Q VIENEN DESDE EL REST
+//..viene de cliente.service.ts ...
+//14.-SE CREA UN ATRIBUTO. UN ARREGLO DE ERRORES DEL TIPO STRING.
+//15.-SE CAPTURAN LOS MENSAJES DE ERROR DEL REST. SE AGREGA UN SEGUNDO PARÁMETRO A LA FUNCIÓN. YA "errores" SE LE PASAN LOS ERRORES.
+  //err : ES EL NOMBRE Q SE LE PUSO A PARÁMETRO. err TIENE EL ATRIBUTO JSON "error" Y error TIENE EL TRIBUTO "errors" QUE VIENE DE LA RESPUESTA DEL REST. "errors" VIENE CON UN TIPO ANY Y SE PASA A STRING.
+//16.-SE HACE LO MISMO DEL NUM 15 PARA UPDATE.
+
 @Component({selector: 'app-form',templateUrl: './form.component.html'})
 export class FormComponent implements OnInit {
                                //5                              //9                         //11.3
@@ -49,7 +62,15 @@ export class FormComponent implements OnInit {
     //7
     this.clienteService.create(this.cliente).subscribe(
       //10
-      response => this.router.navigate(['/clientes'])
+      response => {this.router.navigate(['/clientes'])
+      },
+      //15
+      err => {
+        this.errores = err.error.errors as string[];
+        console.error('Código del error desde el backend: ' + err.status);
+        console.error(err.error.errors);
+        //alert(err.error.errors);
+      }
     );
   }
 
@@ -65,15 +86,25 @@ export class FormComponent implements OnInit {
 
   //13
   update():void{
-    this.clienteService.update(this.cliente).subscribe(cliente => {
-      this.router.navigate(['/clientes']);
-    });
+    this.clienteService.update(this.cliente).subscribe(
+      cliente => {this.router.navigate(['/clientes']);
+    },
+      //16
+      err => {
+        this.errores = err.error.errors as string[];
+        console.error('Código del error desde el backend: ' + err.status);
+        console.error(err.error.errors);
+        //alert(err.error.errors);
+      }
+    );
   }
 
   //2
   cliente: Cliente = new Cliente();
   //4
   titulo: string = "Crear cliente";
+  //14
+  errores : string[];
 
 
 }
